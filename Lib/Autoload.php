@@ -1,7 +1,7 @@
 <?php
 
     namespace couchService\Service\Lib;
-    use couchService\Service\Exceptions\AutoloadException;
+    use couchService\Service\Lib\Exceptions\AutoloadException;
 
     class Autoload {
 
