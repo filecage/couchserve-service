@@ -21,7 +21,6 @@
                 throw new ModuleRegistryException('Module already registered, multiple registrations are not allowed');
             }
             $this->modules[$configurationRow['id']] = $module;
-            $module->injectConfigurationRow($configurationRow);
             $module->register();
         }
 
