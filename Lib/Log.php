@@ -75,32 +75,38 @@
             return self::$logFilePointer;
         }
 
-        static public function verbose($message) {
+        static public function verbose($message, $args = []) {
+            $message = vsprintf($message, $args);
             static::appLog($message, self::LOG_LEVEL_VERBOSE, 'VERBOSE');
             static::fileLog($message, self::LOG_LEVEL_VERBOSE, 'VERBOSE');
         }
 
-        static public function info($message) {
+        static public function info($message, $args = []) {
+            $message = vsprintf($message, $args);
             static::appLog($message, self::LOG_LEVEL_INFO, 'INFO');
             static::fileLog($message, self::LOG_LEVEL_INFO, 'INFO');
         }
 
-        static public function notice($message) {
+        static public function notice($message, $args = []) {
+            $message = vsprintf($message, $args);
             static::appLog($message, self::LOG_LEVEL_NOTICE, 'NOTICE');
             static::fileLog($message, self::LOG_LEVEL_NOTICE, 'NOTICE');
         }
 
-        static public function warn($message) {
+        static public function warn($message, $args = []) {
+            $message = vsprintf($message, $args);
             static::appLog($message, self::LOG_LEVEL_WARN, 'WARN');
             static::fileLog($message, self::LOG_LEVEL_WARN, 'WARN');
         }
 
-        static public function error($message) {
+        static public function error($message, $args = []) {
+            $message = vsprintf($message, $args);
             static::appLog($message, self::LOG_LEVEL_ERROR, 'ERROR');
             static::fileLog($message, self::LOG_LEVEL_ERROR, 'ERROR');
         }
 
-        static public function fatal($message) {
+        static public function fatal($message, $args = []) {
+            $message = vsprintf($message, $args);
             static::appLog($message, self::LOG_LEVEL_FATAL, 'FATAL');
             static::fileLog($message, self::LOG_LEVEL_FATAL, 'FATAL');
         }
