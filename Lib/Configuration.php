@@ -25,7 +25,7 @@
          * @param Database $db
          */
         protected static function loadEnvironment($db) {
-            foreach ($db->getArray('SELECT envKey, value FROM environment') as $row) {
+            foreach ($db->query('SELECT envKey, value FROM environment')->getArray() as $row) {
                 static::$environment[$row['envKey']] = $row['value'];
             }
         }
@@ -34,7 +34,7 @@
          * @param Database $db
          */
         protected static function loadModules($db) {
-            foreach ($db->getArray('SELECT id, name, type FROM modules WHERE active = 1') as $row) {
+            foreach ($db->query('SELECT id, name, type FROM modules WHERE active = 1')->getArray() as $row) {
                 static::$modules[$row['id']] = $row;
             }
         }
