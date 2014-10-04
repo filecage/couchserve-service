@@ -25,7 +25,7 @@
          * @param Database $db
          */
         protected static function loadEnvironment($db) {
-            foreach ($db->query('SELECT envKey, value FROM environment')->getArray() as $row) {
+            foreach ($db->query('SELECT environmentKey, value FROM environment')->getArray() as $row) {
                 static::$environment[$row['envKey']] = $row['value'];
             }
         }
