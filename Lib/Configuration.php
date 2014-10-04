@@ -48,10 +48,11 @@
 
         /**
          * @param string $key
+         * @param mixed $default Default value to return if value is undefined
          * @return mixed
          */
-        public static function getEnvironmentKey($key) {
-            return (isset(static::$environment[$key])) ? static::$environment : null;
+        public static function getEnvironmentKey($key, $default = null) {
+            return (isset(static::$environment[$key])) ? static::$environment : $default;
         }
 
     }
