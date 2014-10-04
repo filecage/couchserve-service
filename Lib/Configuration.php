@@ -39,4 +39,19 @@
             }
         }
 
+        /**
+         * @return Array
+         */
+        public static function getModules() {
+            return static::$modules;
+        }
+
+        /**
+         * @param string $key
+         * @return mixed
+         */
+        public static function getEnvironmentKey($key) {
+            return (isset(static::$environment[$key])) ? static::$environment : null;
+        }
+
     }
