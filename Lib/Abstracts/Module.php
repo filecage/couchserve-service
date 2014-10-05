@@ -3,7 +3,8 @@
     namespace couchServe\Service\Lib\Abstracts;
     use couchServe\Service\Lib\Database;
 
-    abstract class Module {
+    abstract class Module implements couchServe\Service\Lib\Interfaces\Module {
+
         /**
          * @var Database
          */
@@ -21,6 +22,7 @@
             $this->configurationRow = $row;
         }
 
-        public abstract function register();
-        public abstract function unregister();
+        public function register() { }
+
+        public function unregister() { }
     }
