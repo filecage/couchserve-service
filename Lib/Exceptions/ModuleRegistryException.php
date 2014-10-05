@@ -1,4 +1,4 @@
 <?php
 
     namespace couchService\Service\Lib\Exceptions;
-    class ModuleRegistryException extends \Exception {}
+    class ModuleRegistryException extends GenericException {}
