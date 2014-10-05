@@ -17,14 +17,15 @@
          * @throws ModuleRegistryException
          */
         public function registerModule(Module $module, Array $configurationRow) {
-            if (isset($this->modules[$configurationRow['id']])) {
+            $id = APP_ID . '_' . $configurationRow['id'];
+            if (isset($id)) {
                 throw new ModuleRegistryException('Module already registered, multiple registrations are not allowed');
             }
-            $this->modules[$configurationRow['id']] = $module;
+            $this->modules[$id] = $module;
             $module->register();
 
             Log::verbose('Registered new module #%d "%s" of type %s', [
-                $configurationRow['id'],
+                $id,
                 $configurationRow['name'],
                 $configurationRow['type']
             ]);
