@@ -30,10 +30,29 @@
         }
 
         protected function tick(CommandPool $commandPool) {
+            $this->collectCommands($commandPool);
+            $this->processCommands($commandPool);
+            $this->broadcastCommands($commandPool);
+        }
+
+        protected function collectCommands(CommandPool $commandPool) {
             foreach ($this->sensorRegistry->getSensors() as $sensor) {
                 $commandPool->addCommands($sensor->sense());
             }
+        }
 
+        protected function processCommands(CommandPool $commandPool) {
+            $modules = $this->moduleRegistry->getModules();
+            foreach ($commandPool->getCommands() as $command) {
+                if (!isset($modules[$command->getTargetId()])) {
+                    continue;
+                }
+                $modules[$command->getTargetId()]->act($command);
+            }
+        }
+
+        protected function broadcastCommands(CommandPool $commandPool) {
+            // todo: implement broadcasting
         }
 
         protected function stayAlive() {
