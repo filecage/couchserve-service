@@ -37,7 +37,7 @@
          * @param String $messageLogLevelName
          */
         static protected function appLog($message, $messageLogLevel, $messageLogLevelName) {
-            if (static::getAppLogLevel() < $messageLogLevel) {
+            if (static::getAppLogLevel() > $messageLogLevel) {
                 return;
             }
 
@@ -54,7 +54,7 @@
          * @param String $messageLogLevelName
          */
         static protected function fileLog($message, $messageLogLevel, $messageLogLevelName) {
-            if (static::getFileLogLevel() <  $messageLogLevel) {
+            if (static::getFileLogLevel() > $messageLogLevel) {
                 return;
             }
 
