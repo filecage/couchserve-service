@@ -37,7 +37,11 @@
 
         protected function collectCommands(CommandPool $commandPool) {
             foreach ($this->sensorRegistry->getSensors() as $sensor) {
-                $commandPool->addCommands($sensor->sense());
+                $commands = $sensor->sense();
+                if (!is_array($commands)){
+                    $commands = [$commands];
+                }
+                $commandPool->addCommands($commands);
             }
         }
 
