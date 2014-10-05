@@ -9,4 +9,6 @@ php 5.5 or higher, mysql
 
 setup
 ------------------
-set up the mysql database from the sql dump, modify the Lib/Supplier.php to match your mysql credentials and run service.php
+1. set up the mysql database from the sql dump
+2. modify the Lib/Supplier.php to match your mysql credentials
+3. run service.php
