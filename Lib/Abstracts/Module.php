@@ -3,7 +3,7 @@
     namespace couchServe\Service\Lib\Abstracts;
     use couchServe\Service\Lib\Database;
 
-    abstract class Module implements couchServe\Service\Lib\Interfaces\Module {
+    abstract class Module implements \couchServe\Service\Lib\Interfaces\Module {
 
         /**
          * @var Database
