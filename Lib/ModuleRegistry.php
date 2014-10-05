@@ -32,4 +32,11 @@
             ]);
         }
 
+        /**
+         * @return Abstracts\Module[]
+         */
+        public function getModules() {
+            return $this->modules;
+        }
+
     }

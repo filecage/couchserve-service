@@ -32,4 +32,11 @@
             ]);
         }
 
+        /**
+         * @return Abstracts\Sensor[]
+         */
+        public function getSensors() {
+            return $this->sensors;
+        }
+
     }
