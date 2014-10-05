@@ -18,9 +18,10 @@
          */
         public function registerModule(Module $module, Array $configurationRow) {
             $id = APP_ID . '_' . $configurationRow['id'];
-            if (isset($id)) {
+            if (isset($this->modules[$id])) {
                 throw new ModuleRegistryException('Module already registered, multiple registrations are not allowed');
             }
+
             $this->modules[$id] = $module;
             $module->register();
 
