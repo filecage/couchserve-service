@@ -58,7 +58,7 @@
                 return;
             }
 
-            fwrite(self::getFilePointer(), vsprintf("%s -%s- %s\n", [
+            fwrite(self::getFilePointer(), vsprintf("%s -%s- %s\r\n", [
                 date('r'),
                 $messageLogLevelName,
                 $message
