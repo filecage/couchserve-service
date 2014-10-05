@@ -11,4 +11,6 @@
     Log::info('Hello! :)');
 
     $bootstrap = new couchServe\Service\Lib\Bootstrap();
-    $bootstrap->loadApp();
+    $app = $bootstrap->loadApp();
+
+    $app->run();

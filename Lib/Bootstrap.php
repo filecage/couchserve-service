@@ -25,6 +25,7 @@
             $this->loadConfiguration();
             $this->loadModules();
             $this->loadSensors();
+            return new App($this->moduleRegistry, $this->sensorRegistry);
         }
 
         protected function loadConfiguration() {
