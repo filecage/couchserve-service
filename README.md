@@ -1,11 +1,12 @@
 couchserve-service
 ==================
-a php home automation framework
+**a php home automation framework**
 see https://github.com/filecage/couchserve-web for web control application
 
 requires
 ------------------
-php 5.5 or higher, mysql
+- php 5.5 or higher
+- mysql
 
 setup
 ------------------
