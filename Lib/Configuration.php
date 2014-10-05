@@ -1,6 +1,6 @@
 <?php
 
-    namespace couchService\Service\Lib;
+    namespace couchServe\Service\Lib;
 
     class Configuration {
 

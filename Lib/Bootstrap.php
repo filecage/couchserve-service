@@ -1,7 +1,7 @@
 <?php
 
-    namespace couchService\Service\Lib;
-    use couchService\Service\Lib\Abstracts\Module;
+    namespace couchServe\Service\Lib;
+    use couchServe\Service\Lib\Abstracts\Module;
 
     class Bootstrap {
 

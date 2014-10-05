@@ -1,8 +1,8 @@
 <?php
 
-    namespace couchService\Service\Lib;
-    use couchService\Service\Lib\Abstracts\Module;
-    use couchService\Service\Lib\Exceptions\ModuleRegistryException;
+    namespace couchServe\Service\Lib;
+    use couchServe\Service\Lib\Abstracts\Module;
+    use couchServe\Service\Lib\Exceptions\ModuleRegistryException;
 
     class ModuleRegistry {
 

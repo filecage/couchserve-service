@@ -1,7 +1,7 @@
 <?php
 
-    namespace couchService\Service\Lib\Abstracts;
-    use couchService\Service\Lib\Database;
+    namespace couchServe\Service\Lib\Abstracts;
+    use couchServe\Service\Lib\Database;
 
     abstract class Module {
         /**

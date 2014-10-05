@@ -1,7 +1,7 @@
 <?php
 
-    namespace couchService\Service\Lib\Exceptions;
-    use couchService\Service\Lib\Log;
+    namespace couchServe\Service\Lib\Exceptions;
+    use couchServe\Service\Lib\Log;
     use \Exception;
 
     class GenericException extends \Exception {
