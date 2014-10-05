@@ -42,7 +42,7 @@
 
         protected function loadSensors() {
             foreach (Configuration::getSensors() as $configurationRow) {
-                /** @var Sensor $module */
+                /** @var Sensor $sensor */
                 $sensor = new $configurationRow['type'];
                 $sensor->injectConfigurationRow($configurationRow);
                 $this->sensorRegistry->registerSensor($sensor, $configurationRow);
