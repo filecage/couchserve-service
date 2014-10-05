@@ -22,6 +22,12 @@
             }
             $this->modules[$configurationRow['id']] = $module;
             $module->register();
+
+            Log::verbose('Registered new module #%d "%s" of type %s', [
+                $configurationRow['id'],
+                $configurationRow['name'],
+                $configurationRow['type']
+            ]);
         }
 
     }
