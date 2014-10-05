@@ -7,6 +7,7 @@
         protected static $prepared = false;
         protected static $environment = [];
         protected static $modules = [];
+        protected static $sensors = [];
 
         /**
          * @param Database $db
@@ -18,6 +19,7 @@
 
             static::loadEnvironment($db);
             static::loadModules($db);
+            static::loadSensors($db);
             static::$prepared = true;
         }
 
@@ -40,9 +42,25 @@
         }
 
         /**
+         * @param Database $db
+         */
+        protected static function loadSensors($db) {
+            foreach ($db->query('SELECT id, name, type FROM sensors WHERE active = 1')->getArray() as $row) {
+                static::$sensors[$row['id']] = $row;
+            }
+        }
+
+        /**
          * @return Array
          */
         public static function getModules() {
+            return static::$modules;
+        }
+
+        /**
+         * @return Array
+         */
+        public static function getSensors() {
             return static::$modules;
         }
 
