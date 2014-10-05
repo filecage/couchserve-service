@@ -61,7 +61,7 @@
          * @return Array
          */
         public static function getSensors() {
-            return static::$modules;
+            return static::$sensors;
         }
 
         /**
