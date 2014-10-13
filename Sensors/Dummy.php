@@ -2,7 +2,7 @@
 
     namespace couchServe\service\Sensors;
     use couchServe\service\Lib\Abstracts\Sensor;
-    use couchServe\service\Lib\Command;
+    use couchServe\service\Lib\Sense;
     use couchServe\service\Lib\Log;
 
     class Dummy extends Sensor {
@@ -15,16 +15,11 @@
 
         public function sense() {
             $this->cnt++;
+            return $this;
+        }
 
-            if ($this->cnt < 50000) {
-                return [];
-            }
-
-            $this->cnt = 0;
-            $command = new Command;
-            return $command->setTargetId(1)
-                    ->setOrigin($this)
-                    ->setData(['foo' => 'bar']);
+        public function getSenses() {
+            return [new Sense($this, $this->cnt)];
         }
 
     }
