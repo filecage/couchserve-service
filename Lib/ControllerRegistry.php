@@ -4,7 +4,7 @@
     use couchServe\Service\Lib\Abstracts\Controller;
     use couchServe\Service\Lib\Exceptions\ModuleRegistryException;
 
-    class ModuleRegistry {
+    class ControllerRegistry {
 
         /**
          * @var Controller[]
