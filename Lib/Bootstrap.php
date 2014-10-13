@@ -27,6 +27,7 @@
             $this->loadConfiguration();
             $this->loadModules();
             $this->loadSensors();
+            $this->loadController();
             return new App($this->moduleRegistry, $this->sensorRegistry, $this->controllerRegistry);
         }
 
