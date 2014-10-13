@@ -30,12 +30,12 @@
         }
 
         protected function tick(CommandPool $commandPool) {
-            $this->collectCommands($commandPool);
+            $this->collectSenses($commandPool);
             $this->processCommands($commandPool);
             $this->broadcastCommands($commandPool);
         }
 
-        protected function collectCommands(CommandPool $commandPool) {
+        protected function collectSenses(CommandPool $commandPool) {
             foreach ($this->sensorRegistry->getSensors() as $sensor) {
                 $commands = $sensor->sense();
                 if (!is_array($commands)){
