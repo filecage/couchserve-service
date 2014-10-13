@@ -24,7 +24,7 @@
         }
 
         /**
-         * @return Abstracts\Module[]
+         * @return Abstracts\Controller[]
          */
         public function getControllers() {
             return $this->controllers;
