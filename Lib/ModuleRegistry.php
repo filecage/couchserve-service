@@ -33,6 +33,24 @@
         }
 
         /**
+         * @param String $type
+         * @param String $name
+         * @throws ModuleRegistryException
+         * @return Bool|Module
+         */
+        public function findModuleByTypeAndName($type, $name) {
+            foreach ($this->modules as $module) {
+                if ($module->getType() == $type && $module->getName() == $name) {
+                    return $module;
+                }
+            }
+            throw new ModuleRegistryException(vsprintf('Could not find module by type "%s" and name "%s"', [
+                $type,
+                $name
+            ]));
+        }
+
+        /**
          * @return Abstracts\Module[]
          */
         public function getModules() {
