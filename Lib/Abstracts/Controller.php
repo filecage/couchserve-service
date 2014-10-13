@@ -2,7 +2,7 @@
 
     namespace couchServe\Service\Lib\Abstracts;
     use couchServe\Service\Lib\Database;
-    use couchServe\Service\Lib\Sense;
+    use couchServe\Service\Lib\CommandPool;
     use couchServe\Service\Lib\Command;
     use couchServe\Service\Lib\ModuleRegistry;
 
@@ -28,16 +28,9 @@
         }
 
         /**
-         * @param Sense $sense
+         * @param CommandPool $commandPool
          * @return $this
          */
-        public abstract function react(Sense $sense);
-
-        /**
-         * @return Command[]
-         */
-        public function getCommands() {
-            return [];
-        }
+        public abstract function react(CommandPool $commandPool);
 
     }

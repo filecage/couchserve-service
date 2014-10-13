@@ -55,14 +55,7 @@
 
         protected function processSenses(CommandPool $commandPool) {
             foreach ($this->controllerRegistry->getControllers() as $controller) {
-                foreach ($commandPool->getSenses() as $sense) {
-                    $controller->react($sense);
-                }
-                $commands = $controller->getCommands();
-                if (!is_array($commands)) {
-                    $commands = [$commands];
-                }
-                $commandPool->addCommands($commands);
+                $controller->react($commandPool);
             }
         }
 
