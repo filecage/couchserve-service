@@ -1,7 +1,8 @@
 <?php
 
     namespace couchServe\Service\Lib;
-    use couchServe\Service\Lib\Abstracts\Sensor;
+    use couchServe\Service\Lib\Abstracts\Controller;
+    use couchServe\Service\Lib\Abstracts\Module;
 
     class Command {
 
@@ -26,7 +27,7 @@
         protected $data = [];
 
         /**
-         * @var Sensor
+         * @var Controller
          */
         protected $origin;
 
@@ -43,6 +44,14 @@
          */
         public function setData(Array $data) {
             $this->data = $data;
+            return $this;
+        }
+
+        public function setTargetByModule(Module $module) {
+            $this->setName($module->getName())
+                 ->setTargetId($module->getId())
+                 ->setType($module->getType());
+
             return $this;
         }
 
@@ -104,17 +113,17 @@
         }
 
         /**
-         * @return Sensor
+         * @return Controller
          */
         public function getOrigin() {
             return $this->origin;
         }
 
         /**
-         * @param Sensor $origin
+         * @param Controller $origin
          * @return $this
          */
-        public function setOrigin($origin) {
+        public function setOrigin(Controller $origin) {
             $this->origin = $origin;
             return $this;
         }
