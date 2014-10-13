@@ -24,6 +24,13 @@
         }
 
         /**
+         * @param Command $command
+         */
+        public function addCommand(Command $command) {
+            $this->commands[] = $command;
+        }
+
+        /**
          * @param array $senses
          */
         public function addSenses(Array $senses) {
