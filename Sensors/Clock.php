@@ -14,6 +14,7 @@
 
         public function sense() {
             $this->datetime = new \DateTime();
+            return $this;
         }
 
         public function getSenses() {
