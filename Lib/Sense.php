@@ -19,7 +19,7 @@
          * @param $value
          * @param Sensor $sensor
          */
-        public function __construct($value, Sensor $sensor = null) {
+        public function __construct(Sensor $sensor, $value) {
             $this->value = $value;
             if ($sensor) {
                 $this->sensor = $sensor;
