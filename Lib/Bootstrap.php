@@ -3,6 +3,7 @@
     namespace couchServe\Service\Lib;
     use couchServe\Service\Lib\Abstracts\Module;
     use couchServe\Service\Lib\Abstracts\Sensor;
+    use couchServe\Service\Lib\Abstracts\Controller;
 
     class Bootstrap {
 
@@ -19,13 +20,14 @@
         public function __construct() {
             $this->moduleRegistry = new ModuleRegistry();
             $this->sensorRegistry = new SensorRegistry();
+            $this->controllerRegistry = new ControllerRegistry();
         }
 
         public function loadApp() {
             $this->loadConfiguration();
             $this->loadModules();
             $this->loadSensors();
-            return new App($this->moduleRegistry, $this->sensorRegistry);
+            return new App($this->moduleRegistry, $this->sensorRegistry, $this->controllerRegistry);
         }
 
         protected function loadConfiguration() {
@@ -38,6 +40,15 @@
                 $module = new $configurationRow['type'];
                 $module->injectConfigurationRow($configurationRow);
                 $this->moduleRegistry->registerModule($module, $configurationRow);
+            }
+        }
+
+        protected function loadController() {
+            foreach (Configuration::getController() as $configurationRow) {
+                /** @var Controller $controller */
+                $controller = new $configurationRow['type'];
+                $controller->injectModuleRegistry($this->moduleRegistry);
+                $this->controllerRegistry->registerController($controller);
             }
         }
 
