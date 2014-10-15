@@ -512,25 +512,10 @@
         }
 
         /**
-         * @param \Labs\User $user
-         */
-        public function setUser($user) {
-            $this->user = $user;
-        }
-
-        /**
-         * @return \Labs\User
-         */
-        public function getUser() {
-            return $this->user;
-        }
-
-        /**
          * @return bool
          */
         public function socketIsOpen() {
             $meta = stream_get_meta_data($this->getClientSocket());
-
             return (!$meta['eof'] && !$meta['timed_out']);
         }
 
