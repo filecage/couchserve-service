@@ -80,10 +80,7 @@
                 Configuration::getEnvironmentKey(Server::CONFIG_KEY_BIND_PORT, 8000),
                 false
             );
-            $webSocket->setMaxClients(50);
             $webSocket->setCheckOrigin(false);
-            $webSocket->setMaxConnectionsPerIp(50);
-            $webSocket->setMaxRequestsPerMinute(10);
             $this->webSocket = $webSocket;
         }
 

@@ -1,7 +1,7 @@
 <?php
 
     namespace couchServe\Service\Lib;
-    use couchServe\Service\Lib\WebSocket\Server;
+    use couchServe\Service\Lib\WebSocket\Lib\Server;
 
     class App {
 
@@ -65,6 +65,10 @@
                 }
                 $commandPool->addSenses($senses);
             }
+        }
+
+        protected function collectStreamCommands($commandPool) {
+
         }
 
         protected function processSenses(CommandPool $commandPool) {
