@@ -40,6 +40,35 @@
         }
 
         /**
+         * @param string $type
+         * @return Sense[]
+         */
+        public function findSensesBySensorType($type) {
+            $senses = [];
+            foreach ($this->senses as $sense) {
+                if ($sense->getSensor()->getType() == $type) {
+                    $senses[] = $sense;
+                }
+            }
+            return $senses;
+        }
+
+        /**
+         * @param string $type
+         * @param string $name
+         * @return Sense[]
+         */
+        public function findSensesBySensorTypeAndName($type, $name) {
+            $senses = [];
+            foreach ($this->findSensesBySensorType($type) as $sense) {
+                if ($sense->getSensor()->getName() == $name) {
+                    $senses[] = $sense;
+                }
+            }
+            return $senses;
+        }
+
+        /**
          * @return Command[]
          */
         public function getCommands() {
