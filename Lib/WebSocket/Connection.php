@@ -1,7 +1,6 @@
 <?php
     namespace couchServe\service\Lib\WebSocket;
 
-
     /**
      * WebSocket Connection class
      *
@@ -20,6 +19,10 @@
          */
         private $socket;
         private $handshaked = false;
+
+        /**
+         * @var Application
+         */
         private $application = null;
 
         private $ip;
@@ -179,7 +182,7 @@
             if($this->handshaked) {
                 return $this->handle($data);
             } else {
-                $this->handshake($data);
+                return $this->handshake($data);
             }
         }
 
@@ -302,6 +305,7 @@
             }
             stream_socket_shutdown($this->socket, STREAM_SHUT_RDWR);
             $this->server->removeClientOnClose($this);
+            return true;
         }
 
 
@@ -367,9 +371,9 @@
             foreach (array_keys($frameHead) as $i) {
                 $frameHead[$i] = chr($frameHead[$i]);
             }
+            $mask = array();
             if($masked === true) {
                 // generate a random mask:
-                $mask = array();
                 for ($i = 0; $i < 4; $i++) {
                     $mask[$i] = chr(rand(0, 255));
                 }
@@ -379,7 +383,6 @@
             $frame = implode('', $frameHead);
 
             // append payload to frame:
-            $framePayload = array();
             for ($i = 0; $i < $payloadLength; $i++) {
                 $frame .= ($masked === true) ? $payload[$i] ^ $mask[$i % 4] : $payload[$i];
             }
@@ -388,8 +391,6 @@
         }
 
         private function hybi10Decode($data) {
-            $payloadLength = '';
-            $mask = '';
             $unmaskedPayload = '';
             $decodedData = array();
 

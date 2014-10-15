@@ -13,8 +13,16 @@
         const CONFIG_KEY_BIND_IP = 'WEBSOCKETS_BIND_IP';
         const CONFIG_KEY_BIND_PORT = 'WEBSOCKETS_BIND_PORT';
 
+        /**
+         * @var Connection[]
+         */
         protected $clients = array();
+
+        /**
+         * @var Application[]
+         */
         protected $applications = array();
+
         private $_ipStorage = array();
         private $_requestStorage = array();
 
@@ -105,7 +113,7 @@
          * Returns a server application.
          *
          * @param string $key Name of application.
-         * @return object The application object.
+         * @return Application The application object.
          */
         public function getApplication($key) {
             if(empty($key)) {
@@ -341,7 +349,7 @@
         /**
          * Adds a domain to the allowed origin storage.
          *
-         * @param sting $domain A domain name from which connections to server are allowed.
+         * @param string $domain A domain name from which connections to server are allowed.
          * @return bool True if domain was added to storage.
          */
         public function setAllowedOrigin($domain) {

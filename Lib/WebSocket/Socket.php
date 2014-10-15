@@ -85,7 +85,11 @@
             stream_context_set_option($this->context, 'ssl', 'verify_peer', false);
         }
 
-        // method originally found in phpws project:
+        /**
+         * @param resource $resource
+         * @return string
+         * @author originally found in phpws project
+         */
         protected function readBuffer($resource) {
             if($this->ssl === true) {
                 $buffer = fread($resource, 8192);
@@ -116,7 +120,12 @@
             }
         }
 
-        // method originally found in phpws project:
+        /**
+         * @param resource $resource
+         * @param string $string
+         * @return bool|int
+         * @author originally found in phpws project
+         */
         public function writeBuffer($resource, $string) {
             $stringLength = strlen($string);
             for ($written = 0; $written < $stringLength; $written += $fwrite) {
