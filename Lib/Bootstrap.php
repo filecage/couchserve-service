@@ -4,6 +4,7 @@
     use couchServe\Service\Lib\Abstracts\Module;
     use couchServe\Service\Lib\Abstracts\Sensor;
     use couchServe\Service\Lib\Abstracts\Controller;
+    use couchServe\Service\Lib\WebSocket\Server;
 
     class Bootstrap {
 
@@ -17,6 +18,16 @@
          */
         protected $sensorRegistry;
 
+        /**
+         * @var ControllerRegistry
+         */
+        protected $controllerRegistry;
+
+        /**
+         * @var Server
+         */
+        protected $webSocket;
+
         public function __construct() {
             $this->moduleRegistry = new ModuleRegistry();
             $this->sensorRegistry = new SensorRegistry();
@@ -28,7 +39,8 @@
             $this->loadModules();
             $this->loadSensors();
             $this->loadController();
-            return new App($this->moduleRegistry, $this->sensorRegistry, $this->controllerRegistry);
+            $this->setupWebSocket();
+            return new App($this->moduleRegistry, $this->sensorRegistry, $this->controllerRegistry, $this->webSocket);
         }
 
         protected function loadConfiguration() {
@@ -60,6 +72,19 @@
                 $sensor->injectConfigurationRow($configurationRow);
                 $this->sensorRegistry->registerSensor($sensor, $configurationRow);
             }
+        }
+
+        protected function setupWebSocket() {
+            $webSocket = new Server(
+                Configuration::getEnvironmentKey(Server::CONFIG_KEY_BIND_IP, '0.0.0.0'),
+                Configuration::getEnvironmentKey(Server::CONFIG_KEY_BIND_PORT, 8000),
+                false
+            );
+            $webSocket->setMaxClients(50);
+            $webSocket->setCheckOrigin(false);
+            $webSocket->setMaxConnectionsPerIp(50);
+            $webSocket->setMaxRequestsPerMinute(10);
+            $this->webSocket = $webSocket;
         }
 
     }

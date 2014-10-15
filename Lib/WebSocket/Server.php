@@ -9,6 +9,10 @@
      * @author Simon Samtleben <web@lemmingzshadow.net>
      */
     class Server extends Socket {
+
+        const CONFIG_KEY_BIND_IP = 'WEBSOCKETS_BIND_IP';
+        const CONFIG_KEY_BIND_PORT = 'WEBSOCKETS_BIND_PORT';
+
         protected $clients = array();
         protected $applications = array();
         private $_ipStorage = array();
@@ -395,7 +399,7 @@
          * Sets how many clients are allowed to connect to server until no more
          * connections are accepted.
          *
-         * @param in $max Max. total connections to server.
+         * @param int $max Max. total connections to server.
          * @return bool True if value could be set.
          */
         public function setMaxClients($max) {

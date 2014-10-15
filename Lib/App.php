@@ -1,6 +1,7 @@
 <?php
 
     namespace couchServe\Service\Lib;
+    use couchServe\Service\Lib\WebSocket\Server;
 
     class App {
 
@@ -20,14 +21,26 @@
         protected $controllerRegistry;
 
         /**
+         * @var Server
+         */
+        protected $webSocket;
+
+        /**
          * @param ModuleRegistry $moduleRegistry
          * @param SensorRegistry $sensorRegistry
          * @param ControllerRegistry $controllerRegistry
+         * @param Server $webSocket
          */
-        public function __construct(ModuleRegistry $moduleRegistry, SensorRegistry $sensorRegistry, ControllerRegistry $controllerRegistry) {
+        public function __construct(
+            ModuleRegistry $moduleRegistry,
+            SensorRegistry $sensorRegistry,
+            ControllerRegistry $controllerRegistry,
+            Server $webSocket
+        ) {
             $this->moduleRegistry = $moduleRegistry;
             $this->sensorRegistry = $sensorRegistry;
             $this->controllerRegistry = $controllerRegistry;
+            $this->webSocket = $webSocket;
         }
 
         public function run() {
@@ -70,7 +83,7 @@
         }
 
         protected function broadcastCommands(CommandPool $commandPool) {
-            // todo: implement broadcasting
+
         }
 
         protected function stayAlive() {
