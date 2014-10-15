@@ -1,7 +1,8 @@
 <?php
 
     namespace couchServe\Service\Lib;
-    use couchServe\Service\Lib\WebSocket\Lib\Server;
+    use couchServe\Service\Lib\WebSocket\Container;
+    use couchServe\Service\Lib\WebSocket\Handler;
 
     class App {
 
@@ -21,26 +22,26 @@
         protected $controllerRegistry;
 
         /**
-         * @var Server
+         * @var Container
          */
-        protected $webSocket;
+        protected $webSocketContainer;
 
         /**
          * @param ModuleRegistry $moduleRegistry
          * @param SensorRegistry $sensorRegistry
          * @param ControllerRegistry $controllerRegistry
-         * @param Server $webSocket
+         * @param Container $webSocket
          */
         public function __construct(
             ModuleRegistry $moduleRegistry,
             SensorRegistry $sensorRegistry,
             ControllerRegistry $controllerRegistry,
-            Server $webSocket
+            Container $webSocketContainer
         ) {
             $this->moduleRegistry = $moduleRegistry;
             $this->sensorRegistry = $sensorRegistry;
             $this->controllerRegistry = $controllerRegistry;
-            $this->webSocket = $webSocket;
+            $this->webSocketContainer = $webSocketContainer;
         }
 
         public function run() {

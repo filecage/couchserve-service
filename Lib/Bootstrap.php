@@ -5,6 +5,8 @@
     use couchServe\Service\Lib\Abstracts\Sensor;
     use couchServe\Service\Lib\Abstracts\Controller;
     use couchServe\Service\Lib\WebSocket\Lib\Server;
+    use couchServe\Service\Lib\WebSocket\Container;
+    use couchServe\Service\Lib\WebSocket\Handler;
 
     class Bootstrap {
 
@@ -24,9 +26,9 @@
         protected $controllerRegistry;
 
         /**
-         * @var Server
+         * @var Container
          */
-        protected $webSocket;
+        protected $webSocketContainer;
 
         public function __construct() {
             $this->moduleRegistry = new ModuleRegistry();
@@ -40,7 +42,7 @@
             $this->loadSensors();
             $this->loadController();
             $this->setupWebSocket();
-            return new App($this->moduleRegistry, $this->sensorRegistry, $this->controllerRegistry, $this->webSocket);
+            return new App($this->moduleRegistry, $this->sensorRegistry, $this->controllerRegistry, $this->webSocketContainer);
         }
 
         protected function loadConfiguration() {
@@ -75,13 +77,15 @@
         }
 
         protected function setupWebSocket() {
-            $webSocket = new Server(
+            $webSocketHandler = new Handler;
+            $webSocketServer = new Server(
                 Configuration::getEnvironmentKey(Server::CONFIG_KEY_BIND_IP, '0.0.0.0'),
                 Configuration::getEnvironmentKey(Server::CONFIG_KEY_BIND_PORT, 8000),
                 false
             );
-            $webSocket->setCheckOrigin(false);
-            $this->webSocket = $webSocket;
+            $webSocketServer->setCheckOrigin(false);
+
+            $this->webSocketContainer = new Container($webSocketServer, $webSocketHandler);
         }
 
     }
