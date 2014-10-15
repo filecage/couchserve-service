@@ -68,18 +68,12 @@
 
                             if(count($this->clients) > $this->_maxClients) {
                                 $client->onDisconnect();
-                                if($this->getApplication('status') !== false) {
-                                    $this->getApplication('status')->statusMsg('Attention: Client Limit Reached!', 'warning');
-                                }
                                 continue;
                             }
 
                             $this->_addIpToStorage($client->getClientIp());
                             if($this->_checkMaxConnectionsPerIp($client->getClientIp()) === false) {
                                 $client->onDisconnect();
-                                if($this->getApplication('status') !== false) {
-                                    $this->getApplication('status')->statusMsg('Connection/Ip limit for ip ' . $client->getClientIp() . ' was reached!', 'warning');
-                                }
                                 continue;
                             }
                         }
@@ -134,16 +128,6 @@
          */
         public function registerApplication($key, $application) {
             $this->applications[$key] = $application;
-
-            // status is kind of a system-app, needs some special cases:
-            if($key === 'status') {
-                $serverInfo = array(
-                    'maxClients' => $this->_maxClients,
-                    'maxConnectionsPerIp' => $this->_maxConnectionsPerIp,
-                    'maxRequetsPerMinute' => $this->_maxRequestsPerMinute,
-                );
-                $this->applications[$key]->setServerInfo($serverInfo);
-            }
         }
 
         /**
@@ -182,11 +166,6 @@
             unset($this->clients[(int)$resource]);
             $index = array_search($resource, $this->allsockets);
             unset($this->allsockets[$index], $client);
-
-            // trigger status application:
-            if($this->getApplication('status') !== false) {
-                $this->getApplication('status')->clientDisconnected($clientIp, $clientPort);
-            }
             unset($clientId, $clientIp, $clientPort, $resource);
         }
 
@@ -211,11 +190,6 @@
             unset($this->clients[(int)$resource]);
             $index = array_search($resource, $this->allsockets);
             unset($this->allsockets[$index], $client);
-
-            // trigger status application:
-            if($this->getApplication('status') !== false) {
-                $this->getApplication('status')->clientDisconnected($clientIp, $clientPort);
-            }
             unset($resource, $clientId, $clientIp, $clientPort);
         }
 

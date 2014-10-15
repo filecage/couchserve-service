@@ -143,11 +143,6 @@
             $this->log('Handshake sent');
             $this->application->onConnect($this);
 
-            // trigger status application:
-            if($this->server->getApplication('status') !== false) {
-                $this->server->getApplication('status')->clientConnected($this->ip, $this->port);
-            }
-
             return true;
         }
 
@@ -203,11 +198,6 @@
             } else {
                 $this->_dataBuffer = '';
                 $this->waitingForData = false;
-            }
-
-            // trigger status application:
-            if($this->server->getApplication('status') !== false) {
-                $this->server->getApplication('status')->clientActivity($this->port);
             }
 
             if(!isset($decodedData['type'])) {
