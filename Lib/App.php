@@ -51,7 +51,6 @@
 
         protected function tick(CommandPool $commandPool) {
             $this->collectSenses($commandPool);
-            $this->collectStreamCommands($commandPool);
             $this->processSenses($commandPool);
             $this->processCommands($commandPool);
             $this->broadcastCommands($commandPool);

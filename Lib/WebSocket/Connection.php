@@ -1,5 +1,5 @@
 <?php
-    namespace couchServe\service\Lib\WebSocket\Lib;
+    namespace couchServe\service\Lib\WebSocket;
 
     /**
      * WebSocket Connection class
@@ -15,7 +15,7 @@
         private $server;
 
         /**
-         * @var Resource
+         * @var Socket
          */
         private $socket;
         private $handshaked = false;
@@ -243,6 +243,7 @@
             $encodedData = $this->hybi10Encode($payload, $type, $masked);
             if(!$this->server->writeBuffer($this->socket, $encodedData)) {
                 $this->server->removeClientOnError($this);
+
                 return false;
             }
 
