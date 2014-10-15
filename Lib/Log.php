@@ -93,7 +93,7 @@
         static protected function log($message, $args, $logLevel) {
             $message = vsprintf($message, $args);
             static::appLog($message, $logLevel, self::$logLevelToName[$logLevel]);
-            static::fileLog($message, $logLevel, 'VERBOSE');
+            static::fileLog($message, $logLevel, self::$logLevelToName[$logLevel]);
         }
 
         static public function verbose($message, $args = []) {
