@@ -1,5 +1,5 @@
 <?php
-    namespace couchServe\service\Lib\WebSocket;
+    namespace couchServe\service\Lib\WebSocket\Lib;
     use couchServe\service\Lib\Log;
 
     /**
