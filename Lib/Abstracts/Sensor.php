@@ -2,8 +2,14 @@
 
     namespace couchServe\Service\Lib\Abstracts;
     use couchServe\Service\Lib\Command;
+    use couchServe\Service\Lib\Sense;
 
     abstract class Sensor extends Module {
+
+        /**
+         * @var Sense[]
+         */
+        protected $senses = [];
 
         /**
          * @return $this
