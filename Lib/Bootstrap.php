@@ -4,7 +4,7 @@
     use couchServe\Service\Lib\Abstracts\Module;
     use couchServe\Service\Lib\Abstracts\Sensor;
     use couchServe\Service\Lib\Abstracts\Controller;
-    use couchServe\Service\Lib\WebSocket\Server;
+    use couchServe\Service\Lib\WebSocket\Lib\Server;
 
     class Bootstrap {
 

@@ -1,6 +1,6 @@
 <?php
 
-    namespace couchServe\service\Lib\WebSocket;
+    namespace couchServe\service\Lib\WebSocket\Lib;
 
     /**
      * WebSocket Server Application
