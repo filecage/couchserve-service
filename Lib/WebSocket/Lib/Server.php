@@ -16,19 +16,19 @@
         /**
          * @var Connection[]
          */
-        protected $clients = array();
+        protected $clients = [];
 
         /**
          * @var Handler[]
          */
-        protected $handler = array();
+        protected $handler = [];
 
-        private $_ipStorage = array();
-        private $_requestStorage = array();
+        private $_ipStorage = [];
+        private $_requestStorage = [];
 
         // server settings:
         private $_checkOrigin = true;
-        private $_allowedOrigins = array();
+        private $_allowedOrigins = [];
         private $_maxClients = 30;
         private $_maxConnectionsPerIp = 5;
         private $_maxRequestsPerMinute = 50;
@@ -268,20 +268,20 @@
         private function _checkRequestLimit($clientId) {
             // no data in storage - no danger:
             if(!isset($this->_requestStorage[$clientId])) {
-                $this->_requestStorage[$clientId] = array(
+                $this->_requestStorage[$clientId] = [
                     'lastRequest' => time(),
                     'totalRequests' => 1
-                );
+                ];
 
                 return true;
             }
 
             // time since last request > 1min - no danger:
             if(time() - $this->_requestStorage[$clientId]['lastRequest'] > 60) {
-                $this->_requestStorage[$clientId] = array(
+                $this->_requestStorage[$clientId] = [
                     'lastRequest' => time(),
                     'totalRequests' => 1
-                );
+                ];
 
                 return true;
             }

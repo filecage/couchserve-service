@@ -75,7 +75,7 @@
             }
 
             // generate headers array:
-            $headers = array();
+            $headers = [];
             foreach ($lines as $line) {
                 $line = chop($line);
                 if(preg_match('/\A(\S+): (.*)\z/', $line, $matches)) {
@@ -308,7 +308,7 @@
         }
 
         private function hybi10Encode($payload, $type = 'text', $masked = true) {
-            $frameHead = array();
+            $frameHead = [];
             $frame = '';
             $payloadLength = strlen($payload);
 
@@ -360,7 +360,7 @@
             foreach (array_keys($frameHead) as $i) {
                 $frameHead[$i] = chr($frameHead[$i]);
             }
-            $mask = array();
+            $mask = [];
             if($masked === true) {
                 // generate a random mask:
                 for ($i = 0; $i < 4; $i++) {
@@ -381,7 +381,7 @@
 
         private function hybi10Decode($data) {
             $unmaskedPayload = '';
-            $decodedData = array();
+            $decodedData = [];
 
             // estimate frame type:
             $firstByteBinary = sprintf('%08b', ord($data[0]));

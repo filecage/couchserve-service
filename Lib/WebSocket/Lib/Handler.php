@@ -12,7 +12,7 @@
         /**
          * @var Handler[]
          */
-        protected static $instances = array();
+        protected static $instances = [];
 
         /**
          * Singleton
