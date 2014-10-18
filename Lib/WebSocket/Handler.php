@@ -1,10 +1,10 @@
 <?php
 
     namespace couchServe\service\Lib\WebSocket;
-    use couchServe\service\Lib\WebSocket\Lib\ApplicationInterface;
+    use couchServe\service\Lib\WebSocket\Lib\HandlerInterface;
     use couchServe\service\Lib\WebSocket\Lib\Connection;
 
-    class Handler implements ApplicationInterface {
+    class Handler implements HandlerInterface {
         function onConnect(Connection $connection) {
             // TODO: Implement onConnect() method.
         }
