@@ -23,7 +23,7 @@
         /**
          * @var array Holds all connected sockets
          */
-        protected $allsockets = array();
+        protected $allsockets = [];
         protected $context = null;
         protected $ssl = false;
 
@@ -59,7 +59,7 @@
 
             // Generate PEM file
             if(!file_exists($pem_file)) {
-                $dn = array(
+                $dn = [
                     "countryName" => "DE",
                     "stateOrProvinceName" => "none",
                     "localityName" => "none",
@@ -67,11 +67,11 @@
                     "organizationalUnitName" => "none",
                     "commonName" => "foo.lh",
                     "emailAddress" => "baz@foo.lh"
-                );
+                ];
                 $privkey = openssl_pkey_new();
                 $cert = openssl_csr_new($dn, $privkey);
                 $cert = openssl_csr_sign($cert, null, $privkey, 365);
-                $pem = array();
+                $pem = [];
                 openssl_x509_export($cert, $pem[0]);
                 openssl_pkey_export($privkey, $pem[1], $pem_passphrase);
                 $pem = implode($pem);
