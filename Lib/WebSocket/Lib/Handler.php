@@ -3,14 +3,14 @@
     namespace couchServe\service\Lib\WebSocket\Lib;
 
     /**
-     * WebSocket Server Application
+     * WebSocket Server Handler
      *
      * @author Nico Kaiser <nico@kaiser.me>
      */
-    abstract class Application {
+    abstract class Handler implements HandlerInterface {
 
         /**
-         * @var Application[]
+         * @var Handler[]
          */
         protected static $instances = array();
 
@@ -22,7 +22,7 @@
         final private function __clone() { }
 
         /**
-         * @return Application
+         * @return Handler
          */
         final public static function getInstance() {
             $calledClassName = get_called_class();

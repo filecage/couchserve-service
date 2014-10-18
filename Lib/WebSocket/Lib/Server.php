@@ -19,9 +19,9 @@
         protected $clients = array();
 
         /**
-         * @var Application[]
+         * @var Handler[]
          */
-        protected $applications = array();
+        protected $handler = array();
 
         private $_ipStorage = array();
         private $_requestStorage = array();
@@ -104,30 +104,30 @@
         }
 
         /**
-         * Returns a server application.
+         * Returns a server handler.
          *
-         * @param string $key Name of application.
-         * @return Application The application object.
+         * @param string $key Name of handler.
+         * @return Handler The handler object.
          */
-        public function getApplication($key) {
+        public function getHandler($key) {
             if(empty($key)) {
                 return false;
             }
-            if(array_key_exists($key, $this->applications)) {
-                return $this->applications[$key];
+            if(array_key_exists($key, $this->handler)) {
+                return $this->handler[$key];
             }
 
             return false;
         }
 
         /**
-         * Adds a new application object to the application storage.
+         * Adds a new handler object to the handler storage.
          *
-         * @param string $key Name of application.
-         * @param object $application The application object.
+         * @param string $key Name of handler.
+         * @param object $handler The handler object.
          */
-        public function registerApplication($key, $application) {
-            $this->applications[$key] = $application;
+        public function registerHandler($key, $handler) {
+            $this->handler[$key] = $handler;
         }
 
         /**
@@ -172,11 +172,11 @@
         /**
          * Removes a client and all references in case of timeout/error.
          *
-         * @param object $client The client object to remove.
+         * @param Connection $client The client object to remove.
          */
         public function removeClientOnError($client) {        // remove reference in clients app:
-            if($client->getClientApplication() !== false) {
-                $client->getClientApplication()->onDisconnect($client);
+            if($client->getClientHandler() !== false) {
+                $client->getClientHandler()->onDisconnect($client);
             }
 
             $resource = $client->getClientSocket();

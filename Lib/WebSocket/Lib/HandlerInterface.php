@@ -2,7 +2,7 @@
 
     namespace couchServe\service\Lib\WebSocket\Lib;
 
-    interface ApplicationInterface {
+    interface HandlerInterface {
         function onConnect(Connection $connection);
 
         function onDisconnect(Connection $connection);

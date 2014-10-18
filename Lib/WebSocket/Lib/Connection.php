@@ -21,9 +21,9 @@
         private $handshaked = false;
 
         /**
-         * @var Application
+         * @var Handler
          */
-        private $application = null;
+        private $handler = null;
 
         private $ip;
         private $port;
@@ -62,11 +62,11 @@
                 return false;
             }
 
-            // check for valid application:
+            // check for valid handler:
             $path = $matches[1];
-            $this->application = $this->server->getApplication(substr($path, 1));
-            if(!$this->application) {
-                $this->log('Invalid application: ' . $path);
+            $this->handler = $this->server->getHandler(substr($path, 1));
+            if(!$this->handler) {
+                $this->log('Invalid handler: ' . $path);
                 $this->sendHttpResponse(404);
                 stream_socket_shutdown($this->socket, STREAM_SHUT_RDWR);
                 $this->server->removeClientOnError($this);
@@ -141,7 +141,7 @@
             }
             $this->handshaked = true;
             $this->log('Handshake sent');
-            $this->application->onConnect($this);
+            $this->handler->onConnect($this);
 
             return true;
         }
@@ -210,12 +210,12 @@
 
             switch ($decodedData['type']) {
                 case 'text':
-                    $this->application->onData($decodedData['payload'], $this);
+                    $this->handler->onData($decodedData['payload'], $this);
                     break;
 
                 case 'binary':
-                    if(method_exists($this->application, 'onBinaryData')) {
-                        $this->application->onBinaryData($decodedData['payload'], $this);
+                    if(method_exists($this->handler, 'onBinaryData')) {
+                        $this->handler->onBinaryData($decodedData['payload'], $this);
                     } else {
                         $this->close(1003);
                     }
@@ -289,8 +289,8 @@
                 return false;
             }
 
-            if($this->application) {
-                $this->application->onDisconnect($this);
+            if($this->handler) {
+                $this->handler->onDisconnect($this);
             }
             stream_socket_shutdown($this->socket, STREAM_SHUT_RDWR);
             $this->server->removeClientOnClose($this);
@@ -496,8 +496,8 @@
             return $this->socket;
         }
 
-        public function getClientApplication() {
-            return (isset($this->application)) ? $this->application : false;
+        public function getClientHandler() {
+            return (isset($this->handler)) ? $this->handler : false;
         }
 
         /**

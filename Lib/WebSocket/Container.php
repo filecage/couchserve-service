@@ -22,7 +22,7 @@
          * @param Handler $handler
          */
         public function __construct(Server $server, Handler $handler) {
-            $server->registerApplication(self::HANDLER_APP_KEY, $handler);
+            $server->registerHandler(self::HANDLER_APP_KEY, $handler);
             $this->server = $server;
             $this->handler = $handler;
         }
