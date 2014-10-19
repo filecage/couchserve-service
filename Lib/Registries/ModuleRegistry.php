@@ -30,7 +30,7 @@
          * @param String $type
          * @param String $name
          * @throws ModuleRegistryException
-         * @return Bool|Module
+         * @return Module
          */
         public function findModuleByTypeAndName($type, $name) {
             foreach ($this->modules as $module) {
@@ -42,6 +42,20 @@
                 $type,
                 $name
             ]));
+        }
+
+        /**
+         * @param String $type
+         * @return Module[]
+         */
+        public function findModulesByType($type) {
+            $modules = [];
+            foreach ($this->modules as $module) {
+                if ($module->getType() == $type) {
+                    $modules[] = $module;
+                }
+            }
+            return $modules;
         }
 
         /**

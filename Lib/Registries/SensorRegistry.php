@@ -27,6 +27,20 @@
         }
 
         /**
+         * @param String $type
+         * @return Sensor[]
+         */
+        public function findModulesByType($type) {
+            $sensors = [];
+            foreach ($this->sensors as $sensor) {
+                if ($sensor->getType() == $type) {
+                    $sensors[] = $sensor;
+                }
+            }
+            return $sensors;
+        }
+
+        /**
          * @return Sensor[]
          */
         public function getSensors() {
