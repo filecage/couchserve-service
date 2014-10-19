@@ -104,6 +104,10 @@
                     $member = new ProtocolMember\ModuleCommand;
                     break;
 
+                case 'SYNC':
+                    $member = new ProtocolMember\Sync;
+                    break;
+
                 default:
                     $member = new ProtocolMember\UnknownCommand;
                     break;

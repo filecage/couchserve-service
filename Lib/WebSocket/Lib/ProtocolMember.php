@@ -34,14 +34,14 @@
         }
 
         /**
-         * @return \couchServe\service\Lib\ModuleRegistry
+         * @return \couchServe\service\Lib\Registries\ModuleRegistry
          */
         protected function getModuleRegistry() {
             return $this->handler->getModuleRegistry();
         }
 
         /**
-         * @return \couchServe\service\Lib\SensorRegistry
+         * @return \couchServe\service\Lib\Registries\SensorRegistry
          */
         protected function getSensorRegistry() {
             return $this->handler->getSensorRegistry();
