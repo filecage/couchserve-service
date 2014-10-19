@@ -28,27 +28,54 @@
         /**
          * @param CommandPool $commandPool
          */
-        function setCommandPool(CommandPool $commandPool) {
+        public function setCommandPool(CommandPool $commandPool) {
             $this->commandPool = $commandPool;
         }
 
-        function setModuleRegistry(ModuleRegistry $moduleRegistry) {
+        /**
+         * @param ModuleRegistry $moduleRegistry
+         */
+        public function setModuleRegistry(ModuleRegistry $moduleRegistry) {
             $this->moduleRegistry = $moduleRegistry;
         }
 
-        function setSensorRegistry(SensorRegistry $sensorRegistry) {
+        /**
+         * @param SensorRegistry $sensorRegistry
+         */
+        public function setSensorRegistry(SensorRegistry $sensorRegistry) {
             $this->sensorRegistry = $sensorRegistry;
         }
 
-        function onConnect(Connection $connection) {
+        /**
+         * @return CommandPool
+         */
+        public function getCommandPool() {
+            return $this->commandPool;
+        }
+
+        /**
+         * @return ModuleRegistry
+         */
+        public function getModuleRegistry() {
+            return $this->moduleRegistry;
+        }
+
+        /**
+         * @return SensorRegistry
+         */
+        public function getSensorRegistry() {
+            return $this->sensorRegistry;
+        }
+
+        public function onConnect(Connection $connection) {
             // TODO: Implement onConnect() method.
         }
 
-        function onDisconnect(Connection $connection) {
+        public function onDisconnect(Connection $connection) {
             // TODO: Implement onDisconnect() method.
         }
 
-        function onData(Array $data, Connection $client) {
+        public function onData(Array $data, Connection $client) {
             // TODO: Implement onData() method.
         }
     }
