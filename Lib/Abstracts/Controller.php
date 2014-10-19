@@ -4,7 +4,7 @@
     use couchServe\Service\Lib\Database;
     use couchServe\Service\Lib\CommandPool;
     use couchServe\Service\Lib\Command;
-    use couchServe\Service\Lib\ModuleRegistry;
+    use couchServe\Service\Lib\Registries\ModuleRegistry;
 
     abstract class Controller {
 
