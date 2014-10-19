@@ -36,9 +36,10 @@
             $moduleData = [];
             foreach ($group->getModuleRegistry()->getModules() as $module) {
                 $moduleData[] = [
-                    'id' => $module->getId(),
-                    'type' => $module->getType(),
-                    'name' => $module->getName()
+                    'id'      => $module->getId(),
+                    'type'    => $module->getType(),
+                    'name'    => $module->getName(),
+                    'options' => $module->getModuleValue()->getExportableOptions()
                 ];
             }
             return $moduleData;
