@@ -5,6 +5,8 @@
 
     abstract class ModuleValue implements \couchServe\service\Lib\Interfaces\ModuleValue {
 
+        const CONTROL_TYPE_TOGGLE = 'CONTROL_TYPE_TOGGLE';
+
         /**
          * @var Module
          */

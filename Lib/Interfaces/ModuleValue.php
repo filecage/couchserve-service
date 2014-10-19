@@ -7,11 +7,16 @@
         /**
          * @return string
          */
-        function getValueType();
+        function getControlType();
 
         /**
          * @return mixed
          */
         function getCurrentValue();
+
+        /**
+         * @return Array
+         */
+        function getExportableOptions();
 
     }
