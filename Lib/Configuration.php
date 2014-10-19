@@ -30,7 +30,7 @@
          */
         protected static function loadEnvironment($db) {
             foreach ($db->query('SELECT environmentKey, value FROM environment')->getArray() as $row) {
-                static::$environment[$row['envKey']] = $row['value'];
+                static::$environment[$row['environmentKey']] = $row['value'];
             }
         }
 
@@ -88,7 +88,7 @@
          * @return mixed
          */
         public static function getEnvironmentKey($key, $default = null) {
-            return (isset(static::$environment[$key])) ? static::$environment : $default;
+            return (isset(static::$environment[$key])) ? static::$environment[$key] : $default;
         }
 
     }
