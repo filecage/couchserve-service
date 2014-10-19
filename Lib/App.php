@@ -69,7 +69,8 @@
         }
 
         protected function collectStreamCommands($commandPool) {
-
+            $this->webSocketContainer->getHandler()->setCommandPool($commandPool);
+            $this->webSocketContainer->getServer()->tick();
         }
 
         protected function processSenses(CommandPool $commandPool) {
