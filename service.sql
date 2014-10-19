@@ -1,6 +1,6 @@
 -- redefine database names if neccessary
-SET @couchServeSchemaName = 'couchserve';
-USE couchserve;
+SET @couchServeSchemaName = 'couchServe';
+USE couchServe;
 
 -- do not modify anything below
 DELIMITER $$
