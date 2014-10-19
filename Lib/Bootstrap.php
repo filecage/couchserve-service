@@ -120,6 +120,7 @@
             $webSocketHandler = new Handler;
             $webSocketHandler->setModuleRegistry($this->moduleRegistry);
             $webSocketHandler->setSensorRegistry($this->sensorRegistry);
+            $webSocketHandler->setGroupRegistry($this->groupRegistry);
 
             $webSocketServer = new Server(
                 Configuration::getEnvironmentKey(Server::CONFIG_KEY_BIND_IP, '0.0.0.0'),

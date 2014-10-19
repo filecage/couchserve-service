@@ -6,6 +6,7 @@
     use couchServe\service\Lib\CommandPool;
     use couchServe\service\Lib\Registries\ModuleRegistry;
     use couchServe\service\Lib\Registries\SensorRegistry;
+    use couchServe\service\Lib\Registries\GroupRegistry;
 
     class Handler implements HandlerInterface {
 
@@ -18,6 +19,11 @@
          * @var SensorRegistry
          */
         protected $sensorRegistry;
+
+        /**
+         * @var GroupRegistry
+         */
+        protected $groupRegistry;
 
         /**
          * @var CommandPool
@@ -46,6 +52,13 @@
         }
 
         /**
+         * @param GroupRegistry $groupRegistry
+         */
+        public function setGroupRegistry(GroupRegistry $groupRegistry) {
+            $this->groupRegistry = $groupRegistry;
+        }
+
+        /**
          * @return CommandPool
          */
         public function getCommandPool() {
@@ -57,6 +70,13 @@
          */
         public function getModuleRegistry() {
             return $this->moduleRegistry;
+        }
+
+        /**
+         * @return GroupRegistry
+         */
+        public function getGroupRegistry() {
+            return $this->groupRegistry;
         }
 
         /**
