@@ -1,8 +1,9 @@
 <?php
 
-    namespace couchServe\Service\Lib;
+    namespace couchServe\Service\Lib\Registries;
     use couchServe\Service\Lib\Abstracts\Module;
     use couchServe\Service\Lib\Exceptions\ModuleRegistryException;
+    use couchServe\Service\Lib\Log;
 
     class ModuleRegistry {
 
@@ -51,7 +52,7 @@
         }
 
         /**
-         * @return Abstracts\Module[]
+         * @return Module[]
          */
         public function getModules() {
             return $this->modules;

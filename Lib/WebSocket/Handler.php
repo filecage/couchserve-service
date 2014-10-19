@@ -4,8 +4,8 @@
     use couchServe\service\Lib\WebSocket\Lib\HandlerInterface;
     use couchServe\service\Lib\WebSocket\Lib\Connection;
     use couchServe\service\Lib\CommandPool;
-    use couchServe\service\Lib\ModuleRegistry;
-    use couchServe\service\Lib\SensorRegistry;
+    use couchServe\service\Lib\Registries\ModuleRegistry;
+    use couchServe\service\Lib\Registries\SensorRegistry;
 
     class Handler implements HandlerInterface {
 

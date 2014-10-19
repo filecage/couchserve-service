@@ -1,6 +1,6 @@
 <?php
 
-    namespace couchServe\Service\Lib;
+    namespace couchServe\Service\Lib\Registries;
     use couchServe\Service\Lib\Abstracts\Controller;
     use couchServe\Service\Lib\Exceptions\ModuleRegistryException;
 

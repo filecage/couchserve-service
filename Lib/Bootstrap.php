@@ -1,6 +1,10 @@
 <?php
 
     namespace couchServe\Service\Lib;
+    use couchServe\Service\Lib\Registries\ModuleRegistry;
+    use couchServe\Service\Lib\Registries\GroupRegistry;
+    use couchServe\Service\Lib\Registries\SensorRegistry;
+    use couchServe\Service\Lib\Registries\ControllerRegistry;
     use couchServe\Service\Lib\Abstracts\Module;
     use couchServe\Service\Lib\Abstracts\Sensor;
     use couchServe\Service\Lib\Abstracts\Controller;

@@ -1,8 +1,9 @@
 <?php
 
-    namespace couchServe\Service\Lib;
+    namespace couchServe\Service\Lib\Registries;
     use couchServe\Service\Lib\Abstracts\Sensor;
     use couchServe\Service\Lib\Exceptions\ModuleRegistryException;
+    use couchServe\Service\Lib\Log;
 
     class SensorRegistry {
 
@@ -33,7 +34,7 @@
         }
 
         /**
-         * @return Abstracts\Sensor[]
+         * @return Sensor[]
          */
         public function getSensors() {
             return $this->sensors;

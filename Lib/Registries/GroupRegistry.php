@@ -1,6 +1,7 @@
 <?php
 
-    namespace couchServe\Service\Lib;
+    namespace couchServe\Service\Lib\Registries;
+    use couchServe\Service\Lib\Group;
 
     class GroupRegistry {
 

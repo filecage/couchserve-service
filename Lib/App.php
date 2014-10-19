@@ -2,7 +2,9 @@
 
     namespace couchServe\Service\Lib;
     use couchServe\Service\Lib\WebSocket\Container;
-    use couchServe\Service\Lib\WebSocket\Handler;
+    use couchServe\Service\Lib\Registries\ModuleRegistry;
+    use couchServe\Service\Lib\Registries\SensorRegistry;
+    use couchServe\Service\Lib\Registries\ControllerRegistry;
 
     class App {
 
