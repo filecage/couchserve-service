@@ -13,7 +13,6 @@
 
         /**
          * @param Controller $controller
-         * @throws ModuleRegistryException
          */
         public function registerController(Controller $controller) {
             $this->controllers[] = $controller;
