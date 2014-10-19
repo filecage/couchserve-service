@@ -96,6 +96,10 @@
             foreach (Configuration::getGroups() as $configurationRow) {
                 $group = new Group($configurationRow['id'], $configurationRow['name'], $configurationRow['description']);
                 $this->groupRegistry->registerGroup($group);
+                Log::verbose('Registered new group #%d "%s"', [
+                    $configurationRow['id'],
+                    $configurationRow['name']
+                ]);
             }
         }
 
