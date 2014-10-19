@@ -65,6 +65,20 @@
         }
 
         /**
+         * @return ModuleRegistry
+         */
+        public function getModuleRegistry() {
+            return $this->moduleRegistry;
+        }
+
+        /**
+         * @return SensorRegistry
+         */
+        public function getSensorRegistry() {
+            return $this->sensorRegistry;
+        }
+
+        /**
          * @return String
          */
         public function getDescription() {
