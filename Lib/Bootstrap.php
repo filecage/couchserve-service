@@ -26,6 +26,11 @@
         protected $controllerRegistry;
 
         /**
+         * @var GroupRegistry
+         */
+        protected $groupRegistry;
+
+        /**
          * @var Container
          */
         protected $webSocketContainer;
@@ -34,15 +39,23 @@
             $this->moduleRegistry = new ModuleRegistry();
             $this->sensorRegistry = new SensorRegistry();
             $this->controllerRegistry = new ControllerRegistry();
+            $this->groupRegistry = new GroupRegistry();
         }
 
         public function loadApp() {
             $this->loadConfiguration();
+            $this->loadGroups();
             $this->loadModules();
             $this->loadSensors();
             $this->loadController();
             $this->setupWebSocket();
-            return new App($this->moduleRegistry, $this->sensorRegistry, $this->controllerRegistry, $this->webSocketContainer);
+
+            return new App(
+                $this->moduleRegistry,
+                $this->sensorRegistry,
+                $this->controllerRegistry,
+                $this->webSocketContainer
+            );
         }
 
         protected function loadConfiguration() {
@@ -54,6 +67,9 @@
                 /** @var Module $module */
                 $module = new $configurationRow['type'];
                 $module->injectConfigurationRow($configurationRow);
+                if ($configurationRow['groupId']) {
+                    $module->setGroup($this->groupRegistry->getGroupById($configurationRow['groupId']));
+                }
                 $this->moduleRegistry->registerModule($module, $configurationRow);
             }
         }
@@ -67,11 +83,21 @@
             }
         }
 
+        protected function loadGroups() {
+            foreach (Configuration::getGroups() as $configurationRow) {
+                $group = new Group($configurationRow['id'], $configurationRow['name'], $configurationRow['description']);
+                $this->groupRegistry->registerGroup($group);
+            }
+        }
+
         protected function loadSensors() {
             foreach (Configuration::getSensors() as $configurationRow) {
                 /** @var Sensor $sensor */
                 $sensor = new $configurationRow['type'];
                 $sensor->injectConfigurationRow($configurationRow);
+                if ($configurationRow['groupId']) {
+                    $sensor->setGroup($this->groupRegistry->getGroupById($configurationRow['groupId']));
+                }
                 $this->sensorRegistry->registerSensor($sensor, $configurationRow);
             }
         }

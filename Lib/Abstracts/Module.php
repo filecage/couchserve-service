@@ -2,6 +2,7 @@
 
     namespace couchServe\Service\Lib\Abstracts;
     use couchServe\Service\Lib\Database;
+    use couchServe\Service\Lib\Group;
 
     abstract class Module implements \couchServe\Service\Lib\Interfaces\Module {
 
@@ -31,6 +32,11 @@
         protected $id;
 
         /**
+         * @var Group
+         */
+        protected $group;
+
+        /**
          * @param array $row
          */
         public function injectConfigurationRow(Array $row) {
@@ -38,6 +44,20 @@
             $this->type = $row['type'];
             $this->name = $row['name'];
             $this->id = $row['id'];
+        }
+
+        /**
+         * @return Group
+         */
+        public function getGroup() {
+            return $this->group;
+        }
+
+        /**
+         * @param Group $group
+         */
+        public function setGroup($group) {
+            $this->group = $group;
         }
 
         /**
