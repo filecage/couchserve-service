@@ -75,6 +75,11 @@
                     $module->setGroup($this->groupRegistry->getGroupById($configurationRow['groupId']));
                 }
                 $this->moduleRegistry->registerModule($module, $configurationRow);
+                Log::verbose('Registered new module #%d "%s" of type %s', [
+                    $configurationRow['id'],
+                    $configurationRow['name'],
+                    $configurationRow['type']
+                ]);
             }
         }
 
@@ -103,6 +108,11 @@
                     $sensor->setGroup($this->groupRegistry->getGroupById($configurationRow['groupId']));
                 }
                 $this->sensorRegistry->registerSensor($sensor, $configurationRow);
+                Log::verbose('Registered new sensor #%d "%s" of type %s', [
+                    $configurationRow['id'],
+                    $configurationRow['name'],
+                    $configurationRow['type']
+                ]);
             }
         }
 

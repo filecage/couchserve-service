@@ -25,12 +25,6 @@
 
             $this->sensors[$id] = $sensor;
             $sensor->register();
-
-            Log::verbose('Registered new sensor #%d "%s" of type %s', [
-                $id,
-                $configurationRow['name'],
-                $configurationRow['type']
-            ]);
         }
 
         /**
