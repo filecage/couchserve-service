@@ -1,7 +1,6 @@
 <?php
 
     namespace couchServe\service\Lib\WebSocket;
-    use couchServe\Service\Lib\Command;
     use couchServe\service\Lib\WebSocket\Lib\HandlerInterface;
     use couchServe\service\Lib\WebSocket\Lib\Connection;
     use couchServe\service\Lib\CommandPool;
@@ -76,6 +75,21 @@
         }
 
         public function onData(Array $data, Connection $client) {
-            // TODO: Implement onData() method.
+            if (!isset($data['action'])) {
+                return;
+            }
+
+            switch (strtoupper($data['action'])) {
+                case 'MODULE_COMMAND':
+                    $member = new ProtocolMember\ModuleCommand;
+                    break;
+
+                default:
+                    $member = new ProtocolMember\UnknownCommand;
+                    break;
+            }
+
+            $member->setHandler($this)->act($data, $client);
+
         }
     }
