@@ -1,6 +1,11 @@
 <?php
 
     namespace couchServe\service\Lib;
+    use couchServe\service\Lib\Exceptions\ModuleRegistryException;
+    use couchServe\service\Lib\Registries\ModuleRegistry;
+    use couchServe\service\Lib\Registries\SensorRegistry;
+    use couchServe\service\Lib\Abstracts\Module;
+    use couchServe\service\Lib\Abstracts\Sensor;
 
     class Group {
 
@@ -20,6 +25,16 @@
         protected $description;
 
         /**
+         * @var ModuleRegistry
+         */
+        protected $moduleRegistry;
+
+        /**
+         * @var SensorRegistry
+         */
+        protected $sensorRegistry;
+
+        /**
          * @param $id
          * @param $name
          * @param $description
@@ -28,6 +43,25 @@
             $this->id = $id;
             $this->name = $name;
             $this->description = $description;
+
+            $this->moduleRegistry = new ModuleRegistry();
+            $this->sensorRegistry = new SensorRegistry();
+        }
+
+        /**
+         * @param Module $module
+         * @throws ModuleRegistryException
+         */
+        public function registerModule(Module $module) {
+            $this->moduleRegistry->registerModule($module);
+        }
+
+        /**
+         * @param Sensor $sensor
+         * @throws ModuleRegistryException
+         */
+        public function registerSensor(Sensor $sensor) {
+            $this->sensorRegistry->registerSensor($sensor);
         }
 
         /**
