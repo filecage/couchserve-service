@@ -38,6 +38,7 @@
          */
         public function setGroup($group) {
             $this->group = $group;
+            $this->group->registerSensor($this);
         }
 
         public function act(Command $command) { }

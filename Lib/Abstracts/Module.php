@@ -58,6 +58,7 @@
          */
         public function setGroup($group) {
             $this->group = $group;
+            $this->group->registerModule($this);
         }
 
         /**
