@@ -14,11 +14,10 @@
 
         /**
          * @param Sensor $sensor
-         * @param array $configurationRow
          * @throws ModuleRegistryException
          */
-        public function registerSensor(Sensor $sensor, Array $configurationRow) {
-            $id = APP_ID . '_' . $configurationRow['id'];
+        public function registerSensor(Sensor $sensor) {
+            $id = APP_ID . '_' . $sensor->getId();
             if (isset($this->sensors[$id])) {
                 throw new ModuleRegistryException('Module already registered, multiple registrations are not allowed');
             }

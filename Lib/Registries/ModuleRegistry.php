@@ -14,11 +14,10 @@
 
         /**
          * @param Module $module
-         * @param array $configurationRow
          * @throws ModuleRegistryException
          */
-        public function registerModule(Module $module, Array $configurationRow) {
-            $id = APP_ID . '_' . $configurationRow['id'];
+        public function registerModule(Module $module) {
+            $id = APP_ID . '_' . $module->getId();
             if (isset($this->modules[$id])) {
                 throw new ModuleRegistryException('Module already registered in registry instance, multiple registrations are not allowed');
             }
