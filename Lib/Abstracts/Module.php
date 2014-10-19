@@ -37,6 +37,11 @@
         protected $group;
 
         /**
+         * @var ModuleValue
+         */
+        protected $moduleValue;
+
+        /**
          * @param array $row
          */
         public function injectConfigurationRow(Array $row) {
