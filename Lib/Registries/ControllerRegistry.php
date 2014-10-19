@@ -3,6 +3,7 @@
     namespace couchServe\Service\Lib\Registries;
     use couchServe\Service\Lib\Abstracts\Controller;
     use couchServe\Service\Lib\Exceptions\ModuleRegistryException;
+    use couchServe\Service\Lib\Log;
 
     class ControllerRegistry {
 
@@ -23,7 +24,7 @@
         }
 
         /**
-         * @return Abstracts\Controller[]
+         * @return Controller[]
          */
         public function getControllers() {
             return $this->controllers;
