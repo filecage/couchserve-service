@@ -30,7 +30,7 @@
          * @param ModuleRegistry $moduleRegistry
          * @param SensorRegistry $sensorRegistry
          * @param ControllerRegistry $controllerRegistry
-         * @param Container $webSocket
+         * @param Container $webSocketContainer
          */
         public function __construct(
             ModuleRegistry $moduleRegistry,
