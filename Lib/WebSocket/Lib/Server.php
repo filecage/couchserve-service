@@ -53,53 +53,7 @@
          */
         public function run() {
             while (true) {
-                $changed_sockets = $this->allsockets;
-                @stream_select($changed_sockets, $write = null, $except = null, 0, 5000);
-                foreach ($changed_sockets as $socket) {
-                    if($socket == $this->master) {
-
-                        if(($ressource = stream_socket_accept($this->master)) === false) {
-                            $this->log('Socket error: ' . socket_strerror(socket_last_error($ressource)));
-                            continue;
-                        } else {
-                            $client = $this->createConnection($ressource);
-                            $this->clients[(int)$ressource] = $client;
-                            $this->allsockets[] = $ressource;
-
-                            if(count($this->clients) > $this->_maxClients) {
-                                $client->onDisconnect();
-                                continue;
-                            }
-
-                            $this->_addIpToStorage($client->getClientIp());
-                            if($this->_checkMaxConnectionsPerIp($client->getClientIp()) === false) {
-                                $client->onDisconnect();
-                                continue;
-                            }
-                        }
-                    } else {
-
-                        $client = $this->clients[(int)$socket];
-                        if(!is_object($client)) {
-                            unset($this->clients[(int)$socket]);
-                            continue;
-                        }
-                        $data = $this->readBuffer($socket);
-                        $bytes = strlen($data);
-
-                        if($bytes === 0) {
-                            $client->onDisconnect();
-                            continue;
-                        } elseif($data === false) {
-                            $this->removeClientOnError($client);
-                            continue;
-                        } elseif($client->waitingForData === false && $this->_checkRequestLimit($client->getClientId()) === false) {
-                            $client->onDisconnect();
-                        } else {
-                            $client->onData($data);
-                        }
-                    }
-                }
+                $this->tick();
             }
         }
 
@@ -400,5 +354,55 @@
          */
         public function getMaxClients() {
             return $this->_maxClients;
+        }
+
+        public function tick() {
+            $changed_sockets = $this->allsockets;
+            @stream_select($changed_sockets, $write = null, $except = null, 0, 5000);
+            foreach ($changed_sockets as $socket) {
+                if($socket == $this->master) {
+
+                    if(($ressource = stream_socket_accept($this->master)) === false) {
+                        $this->log('Socket error: ' . socket_strerror(socket_last_error($ressource)));
+                        continue;
+                    } else {
+                        $client = $this->createConnection($ressource);
+                        $this->clients[(int)$ressource] = $client;
+                        $this->allsockets[] = $ressource;
+
+                        if(count($this->clients) > $this->_maxClients) {
+                            $client->onDisconnect();
+                            continue;
+                        }
+
+                        $this->_addIpToStorage($client->getClientIp());
+                        if($this->_checkMaxConnectionsPerIp($client->getClientIp()) === false) {
+                            $client->onDisconnect();
+                            continue;
+                        }
+                    }
+                } else {
+
+                    $client = $this->clients[(int)$socket];
+                    if(!is_object($client)) {
+                        unset($this->clients[(int)$socket]);
+                        continue;
+                    }
+                    $data = $this->readBuffer($socket);
+                    $bytes = strlen($data);
+
+                    if($bytes === 0) {
+                        $client->onDisconnect();
+                        continue;
+                    } elseif($data === false) {
+                        $this->removeClientOnError($client);
+                        continue;
+                    } elseif($client->waitingForData === false && $this->_checkRequestLimit($client->getClientId()) === false) {
+                        $client->onDisconnect();
+                    } else {
+                        $client->onData($data);
+                    }
+                }
+            }
         }
     }
