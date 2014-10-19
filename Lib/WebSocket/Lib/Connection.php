@@ -210,7 +210,10 @@
 
             switch ($decodedData['type']) {
                 case 'text':
-                    $this->handler->onData($decodedData['payload'], $this);
+                    $payloadData = json_decode($decodedData['payload']);
+                    if (is_array($payloadData)) {
+                        $this->handler->onData($payloadData, $this);
+                    }
                     break;
 
                 case 'binary':
