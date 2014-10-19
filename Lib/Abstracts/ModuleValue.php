@@ -1,7 +1,7 @@
 <?php
 
     namespace couchServe\service\Lib\Abstracts;
-    use couchServe\Service\Lib\Interfaces\Module;
+    use couchServe\Service\Lib\Abstracts\Module;
 
     abstract class ModuleValue implements \couchServe\service\Lib\Interfaces\ModuleValue {
 
