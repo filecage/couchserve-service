@@ -9,6 +9,7 @@
         protected static $modules = [];
         protected static $sensors = [];
         protected static $controller = [];
+        protected static $groups = [];
 
         /**
          * @param Database $db
@@ -22,6 +23,7 @@
             static::loadModules($db);
             static::loadSensors($db);
             static::loadController($db);
+            static::loadGroups($db);
             static::$prepared = true;
         }
 
@@ -38,7 +40,7 @@
          * @param Database $db
          */
         protected static function loadModules($db) {
-            foreach ($db->query('SELECT id, name, type FROM modules WHERE active = 1')->getArray() as $row) {
+            foreach ($db->query('SELECT id, name, type, groupId FROM modules WHERE active = 1')->getArray() as $row) {
                 static::$modules[$row['id']] = $row;
             }
         }
@@ -47,7 +49,7 @@
          * @param Database $db
          */
         protected static function loadSensors($db) {
-            foreach ($db->query('SELECT id, name, type FROM sensors WHERE active = 1')->getArray() as $row) {
+            foreach ($db->query('SELECT id, name, type, groupId FROM sensors WHERE active = 1')->getArray() as $row) {
                 static::$sensors[$row['id']] = $row;
             }
         }
@@ -58,6 +60,15 @@
         protected static function loadController($db) {
             foreach ($db->query('SELECT id, type FROM controller WHERE active = 1')->getArray() as $row) {
                 static::$controller[$row['id']] = $row;
+            }
+        }
+
+        /**
+         * @param Database $db
+         */
+        protected static function loadGroups($db) {
+            foreach ($db->query('SELECT id, name, description FROM groups')->getArray() as $row) {
+                static::$groups[$row['id']] = $row;
             }
         }
 
@@ -80,6 +91,13 @@
          */
         public static function getController() {
             return static::$controller;
+        }
+
+        /**
+         * @return Array
+         */
+        public static function getGroups() {
+            return static::$groups;
         }
 
         /**
