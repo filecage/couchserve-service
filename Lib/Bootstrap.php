@@ -78,6 +78,9 @@
 
         protected function setupWebSocket() {
             $webSocketHandler = new Handler;
+            $webSocketHandler->setModuleRegistry($this->moduleRegistry);
+            $webSocketHandler->setSensorRegistry($this->sensorRegistry);
+
             $webSocketServer = new Server(
                 Configuration::getEnvironmentKey(Server::CONFIG_KEY_BIND_IP, '0.0.0.0'),
                 Configuration::getEnvironmentKey(Server::CONFIG_KEY_BIND_PORT, 8000),
