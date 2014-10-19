@@ -81,6 +81,13 @@
         }
 
         /**
+         * @return ModuleValue
+         */
+        public function getModuleValue() {
+            return $this->moduleValue;
+        }
+
+        /**
          * @return Int
          */
         public function getId() {
