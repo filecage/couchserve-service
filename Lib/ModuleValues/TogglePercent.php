@@ -14,6 +14,14 @@
             return $this->value;
         }
 
+        public function setValue($value) {
+            $this->value = max(0, min($value, 100));
+        }
+
+        public function getOppositeValue() {
+            return ($this->value > 0) ? 0 : 100;
+        }
+
         public function getControlType() {
             return ModuleValue::CONTROL_TYPE_TOGGLE;
         }
@@ -21,7 +29,8 @@
         public function getExportableOptions() {
             return [
                 'controlType' => $this->getControlType(),
-                'value' => $this->getCurrentValue()
+                'value' => $this->getCurrentValue(),
+                'nextValue' => $this->getOppositeValue()
             ];
         }
 
