@@ -8,6 +8,7 @@
         const CONFIG_KEY_FILE_LOG_LEVEL = 'LOG_FILE_LOG_LEVEL';
         const CONFIG_KEY_FILE_LOG_FILE = 'LOG_FILE';
 
+        const LOG_LEVEL_DEBUG   = 50;
         const LOG_LEVEL_VERBOSE = 100;
         const LOG_LEVEL_INFO    = 200;
         const LOG_LEVEL_NOTICE  = 300;
@@ -19,6 +20,7 @@
          * @var Array
          */
         protected static $logLevelToName = [
+            self::LOG_LEVEL_DEBUG   => 'DEBUG',
             self::LOG_LEVEL_VERBOSE => 'VERBOSE',
             self::LOG_LEVEL_INFO    => 'INFO',
             self::LOG_LEVEL_NOTICE  => 'NOTICE',
@@ -94,6 +96,10 @@
             $message = vsprintf($message, $args);
             static::appLog($message, $logLevel, self::$logLevelToName[$logLevel]);
             static::fileLog($message, $logLevel, self::$logLevelToName[$logLevel]);
+        }
+
+        static public function debug($message, $args = []) {
+            static::log($message, $args, self::LOG_LEVEL_DEBUG);
         }
 
         static public function verbose($message, $args = []) {
