@@ -62,7 +62,8 @@
                 $sensorData[] = [
                     'id' => $sensor->getId(),
                     'type' => $sensor->getType(),
-                    'name' => $sensor->getName()
+                    'name' => $sensor->getName(),
+                    'value' => $sensor->getCurrentSense()->getValue()
                 ];
             }
             return $sensorData;
