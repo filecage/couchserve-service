@@ -10,33 +10,13 @@
      */
     
     class Database extends \mysqli {
-    
-        /**
-         * Multiplier for milliseconds to microseconds
-         * @constant Database::INTERVAL_MILLISECONDS
-         */
-        const INTERVAL_MILLISECONDS = 1000;
-        
-        /**
-         * Multiplier for seconds to microseconds
-         * @constant Database::INTERVAL_SECONDS
-         */
-        const INTERVAL_SECONDS = 1000000;
-    
+
         /**
          * The last query result object
          * @var \mysqli_result
          */
         protected $result;
-        
-        /**
-         * Query sleep time
-         * @var int
-         * @see Database::setQuerySleep()
-         */
-        protected $querySleep = 0;
-        
-    
+
         /**
          * Instances mysqli by using the default access and checks for connection errors
          *
@@ -65,10 +45,6 @@
          * @return Database
          */
         public function query($query, $args = []) {
-        
-            if ($this->querySleep > 0) {
-                usleep($this->querySleep);
-            }
 
             if (count($args) > 0) {
                 if (!is_array($args)) {
@@ -134,27 +110,6 @@
          */
         public function getResult() {
             return $this->result;
-        }
-        
-        /**
-         * Forces a sleep before each query to prevent database overloading (useful when working with live databases)
-         *
-         * @param int|bool $sleep Sleep time in milliseconds or false to turn off
-         * @param int $multiplier The multiplier for the sleep value to be transformed for usleep (predfined constants are INTERVAL_MILLISECONDS and INTERVAL_SECONDS)
-         * @return Database
-         */
-        public function setQuerySleep($sleep, $multiplier = self::INTERVAL_MILLISECONDS) {
-        
-            // Zero or false should turn it off
-            if (!$sleep || $sleep < 0) {
-                $sleep = 0;
-            }
-            
-            // Multiply by 1000 to transform milliseconds to microseconds
-            $this->querySleep = $sleep * $multiplier;
-        
-            return $this;
-        
         }
         
     }
