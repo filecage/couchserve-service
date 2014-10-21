@@ -1,6 +1,8 @@
 <?php
 
     namespace couchServe\service\Lib\WebSocket\ProtocolMember;
+    use couchServe\service\Lib\Abstracts\ModuleValue;
+    use couchServe\Service\Lib\Exceptions\GenericException;
     use couchServe\service\Lib\WebSocket\Lib\ProtocolMember;
     use couchServe\service\Lib\WebSocket\Lib\Connection;
     use couchServe\service\Lib\Group;
@@ -30,11 +32,16 @@
 
         /**
          * @param Group $group
+         * @throws GenericException
          * @return Array
          */
         protected function collectExportableGroupModuleData(Group $group) {
             $moduleData = [];
             foreach ($group->getModuleRegistry()->getModules() as $module) {
+                if (!$module->getModuleValue() instanceof ModuleValue) {
+                    throw new GenericException('Module value has to be instance of ModuleValue');
+                }
+
                 $moduleData[] = [
                     'id'      => $module->getId(),
                     'type'    => $module->getType(),
