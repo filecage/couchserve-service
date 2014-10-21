@@ -91,7 +91,17 @@
         }
 
         protected function broadcastCommands(CommandPool $commandPool) {
-            
+            foreach ($commandPool->getSenses() as $sense) {
+                $this->webSocketContainer->getHandler()->broadcast([
+                    'type' => 'UPDATE',
+                    'component' => 'SENSOR',
+                    'target' => $sense->getSensor()->getId(),
+                    'data' => [
+                        'value' => $sense->getValue(),
+                        'time' => $sense->getSenseTime()->format('c')
+                    ]
+                ]);
+            }
         }
 
         protected function stayAlive() {
