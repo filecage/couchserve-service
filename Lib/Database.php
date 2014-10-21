@@ -67,6 +67,33 @@
         }
 
         /**
+         * @param $table
+         * @param array $fields
+         * @param array $values
+         * @throws DatabaseException
+         * @return $this
+         */
+        public function insert($table, Array $fields, Array $values) {
+            $valueRows = [];
+            foreach ($values as $valueRow) {
+                if (count($valueRow) != count($fields)) {
+                    throw new DatabaseException('Value count does not match field count');
+                }
+
+                $valueRowValues = [];
+                foreach ($valueRow as $value) {
+                    $valueRowValues[] = sprintf("'%s'", $this->escape_string($value));
+                }
+                $valueRows[] = 'VALUES(' . implode(',', $valueRowValues) . ')';
+            }
+
+            return $this->query('INSERT INTO %s(%s) ' . implode(',', $valueRows), [
+                $table,
+                implode(',', $fields),
+            ]);
+        }
+
+        /**
          * Returns an array of result rows based on the latest result
          *
          * @throws DatabaseException
@@ -101,6 +128,14 @@
             
             return [];
             
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getScalar() {
+            $result = $this->getSingle();
+            return array_shift($result);
         }
         
         /**
