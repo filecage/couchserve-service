@@ -40,6 +40,13 @@
         }
 
         /**
+         * @param Sense $sense
+         */
+        public function addSense(Sense $sense) {
+            $this->senses[] = $sense;
+        }
+
+        /**
          * @param string $type
          * @return Sense[]
          */
