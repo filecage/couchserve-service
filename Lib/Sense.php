@@ -22,8 +22,9 @@
         protected $senseTime;
 
         /**
-         * @param $value
          * @param Sensor $sensor
+         * @param $value
+         * @param string $senseTime
          */
         public function __construct(Sensor $sensor, $value, $senseTime = 'now') {
             $this->value = $value;
