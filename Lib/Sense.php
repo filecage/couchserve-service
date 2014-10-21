@@ -19,16 +19,16 @@
         /**
          * @var DateTime
          */
-        protected $datetime;
+        protected $senseTime;
 
         /**
          * @param $value
          * @param Sensor $sensor
          */
-        public function __construct(Sensor $sensor, $value) {
+        public function __construct(Sensor $sensor, $value, $senseTime = 'now') {
             $this->value = $value;
             $this->sensor = $sensor;
-            $this->datetime = new DateTime;
+            $this->senseTime = new DateTime($senseTime);
         }
 
         /**
@@ -48,8 +48,8 @@
         /**
          * @return DateTime
          */
-        public function getDateTime() {
-            return $this->datetime;
+        public function getSenseTime() {
+            return $this->senseTime;
         }
 
     }
