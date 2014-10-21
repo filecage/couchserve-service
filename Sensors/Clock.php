@@ -12,6 +12,10 @@
          */
         protected $datetime;
 
+        public function __construct() {
+            $this->disableCaching();
+        }
+
         public function getValue() {
             return date('c');
         }
