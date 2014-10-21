@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `sensorValues` (
   `sensorValue` TEXT NULL ,
   `senseTime` DATETIME NULL ,
   PRIMARY KEY (`id`) ,
-  INDEX `id,time` (`sensorId` ASC, `senseTime` ASC) );
+  INDEX `id,time` (`sensorId` ASC, `senseTime` ASC) ) $$
 
 
 -- finish!
