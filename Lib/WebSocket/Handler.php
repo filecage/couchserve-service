@@ -31,6 +31,11 @@
         protected $commandPool;
 
         /**
+         * @var Connection[]
+         */
+        protected $connections = [];
+
+        /**
          * @param CommandPool $commandPool
          */
         public function setCommandPool(CommandPool $commandPool) {
@@ -87,11 +92,16 @@
         }
 
         public function onConnect(Connection $connection) {
-            // TODO: Implement onConnect() method.
+            $this->connections[] = $connection;
         }
 
         public function onDisconnect(Connection $connection) {
-            // TODO: Implement onDisconnect() method.
+            foreach ($this->connections as $key => $compareConnection) {
+                if ($connection == $compareConnection) {
+                    unset($this->connections[$key]);
+                    break;
+                }
+            }
         }
 
         public function onData(Array $data, Connection $client) {
@@ -116,4 +126,5 @@
             $member->setHandler($this)->act($data, $client);
 
         }
+
     }
