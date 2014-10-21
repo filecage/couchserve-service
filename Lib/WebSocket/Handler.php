@@ -127,4 +127,25 @@
 
         }
 
+        /**
+         * @param Array $data
+         * @return $this
+         */
+        public function broadcast(Array $data) {
+            foreach ($this->connections as $connection) {
+                $this->send($connection, $data);
+            }
+            return $this;
+        }
+
+        /**
+         * @param Connection $connection
+         * @param Array $data
+         * @return $this
+         */
+        public function send(Connection $connection, Array $data) {
+            $connection->send(json_encode($data));
+            return $this;
+        }
+        
     }
