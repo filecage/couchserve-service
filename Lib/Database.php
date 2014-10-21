@@ -1,12 +1,12 @@
 <?php
 
     namespace couchServe\Service\Lib;
+    use couchServe\Service\Lib\Exceptions\DatabaseException;
 
     /**
      * Extends mysqli by some useful functions
      *
      * @author David Beuchert
-     * @package Tools
      */
     
     class Database extends \mysqli {
@@ -40,18 +40,18 @@
         /**
          * Instances mysqli by using the default access and checks for connection errors
          *
-         * @throws \Exception
-         * @param string $host
-         * @param string $db
-         * @param string $user
-         * @param string $pass
+         * @throws DatabaseException
+         * @param String $host
+         * @param String $db
+         * @param String $user
+         * @param String $pass
          */
         public function __construct($host, $db, $user = 'root', $pass = '') {
         
             parent::__construct($host, $user, $pass, $db);
             
             if ($this->connect_error) {
-                new \Exception('Could not connect to database - MySQL error: ' . $this->connect_error, $this->connect_errno);
+                throw new DatabaseException('Could not connect to database - MySQL error: ' . $this->connect_error, $this->connect_errno);
             }
             
         }
@@ -59,12 +59,12 @@
         /**
          * Perfoms a query and stores the result for later use
          *
-         * @param string $query
-         * @param array $args
-         * @throws \Exception
-         * @return bool|\mysqli_result|Database
+         * @param String $query
+         * @param Array $args
+         * @throws DatabaseException
+         * @return Database
          */
-        public function query($query, $args = Array()) {
+        public function query($query, $args = []) {
         
             if ($this->querySleep > 0) {
                 usleep($this->querySleep);
@@ -72,7 +72,7 @@
 
             if (count($args) > 0) {
                 if (!is_array($args)) {
-                    $args = Array($args);
+                    $args = [$args];
                 }
                 foreach ($args as $key => $arg) {
                     $args[$key] = $this->escape_string($arg);
@@ -83,26 +83,26 @@
             $this->result = parent::query($query);
             
             if ($this->result === false) {
-                throw new \Exception('MySQL Query "' . $query . '" failed with message: ' . $this->error, $this->errno);
+                throw new DatabaseException('MySQL Query "' . $query . '" failed with message: ' . $this->error, $this->errno);
             }
             
             return $this;
             
         }
-        
+
         /**
          * Returns an array of result rows based on the latest result
          *
+         * @throws DatabaseException
          * @return Array
          */
         public function getArray() {
         
             if (!($this->result instanceof \mysqli_result)) {
-                trigger_error('Unable to return result array as the result is not an instance of MySQLi_Result');
-                return Array();
+                throw new DatabaseException('Unable to return result array as the result is not an instance of MySQLi_Result');
             }
             
-            $return = Array();
+            $return = [];
             while ($row = $this->result->fetch_assoc()) {
                 $return[] = $row;
             }
@@ -123,7 +123,7 @@
                 return $result[0];
             }
             
-            return Array();
+            return [];
             
         }
         
