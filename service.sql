@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `controller` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8$$
 
--- compatible until HEAD
+-- compatible until 399ac369c8b8e744492119580c84b56d74d42226
 CREATE TABLE IF NOT EXISTS `groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) DEFAULT NULL,
@@ -60,6 +60,16 @@ END $$
 
 CALL SQL_Update_HEAD() $$
 DROP PROCEDURE SQL_Update_HEAD $$
+
+-- compatible until HEAD
+CREATE TABLE IF NOT EXISTS `sensorValues` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `sensorId` INT NOT NULL ,
+  `sensorValue` TEXT NULL ,
+  `senseTime` DATETIME NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `id,time` (`sensorId` ASC, `senseTime` ASC) );
+
 
 -- finish!
 DELIMITER ;
