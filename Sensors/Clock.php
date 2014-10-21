@@ -12,13 +12,8 @@
          */
         protected $datetime;
 
-        public function sense() {
-            $this->datetime = new \DateTime();
-            return $this;
-        }
-
-        public function getSenses() {
-            return [new Sense($this, $this->datetime->format('c'))];
+        public function getValue() {
+            return date('c');
         }
 
     }

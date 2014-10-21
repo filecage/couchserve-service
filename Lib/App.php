@@ -62,11 +62,7 @@
 
         protected function collectSenses(CommandPool $commandPool) {
             foreach ($this->sensorRegistry->getSensors() as $sensor) {
-                $senses = $sensor->sense()->getSenses();
-                if (!is_array($senses)) {
-                    $senses = [$senses];
-                }
-                $commandPool->addSenses($senses);
+                $commandPool->addSense($sensor->sense()->getLastSense());
             }
         }
 

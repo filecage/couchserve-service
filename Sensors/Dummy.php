@@ -13,13 +13,8 @@
             Log::info('Dummy sensor loaded');
         }
 
-        public function sense() {
-            $this->cnt++;
-            return $this;
-        }
-
-        public function getSenses() {
-            return [new Sense($this, $this->cnt)];
+        public function getValue() {
+            return $this->cnt++;
         }
 
     }

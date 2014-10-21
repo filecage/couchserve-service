@@ -1,6 +1,7 @@
 <?php
 
     namespace couchServe\Service\Lib\Abstracts;
+    use couchServe\Service\Lib\Exceptions\GenericException;
     use couchServe\Service\Lib\Group;
     use couchServe\Service\Lib\Sense;
 
@@ -27,22 +28,34 @@
         protected $configurationRow;
 
         /**
-         * @var Sense[]
+         * @var Sense
          */
-        protected $senses = [];
+        protected $sense;
 
         /**
          * @var Group
          */
         protected $group;
 
+        public final function sense() {
+            $value = $this->getValue();
+            if (!is_scalar($value) && !is_array($value)) {
+                throw new GenericException('Sensor may only return scalar or array values');
+            }
+            $this->sense = new Sense($this, $value);
+            return $this;
+        }
+
         /**
          * @return $this
          */
-        public abstract function sense();
+        public abstract function getValue();
 
-        public function getSenses() {
-            return $this->senses;
+        /**
+         * @return Sense
+         */
+        public function getLastSense() {
+            return $this->sense;
         }
 
         /**
