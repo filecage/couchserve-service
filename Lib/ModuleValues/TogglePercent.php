@@ -2,6 +2,7 @@
 
     namespace couchServe\service\Lib\ModuleValues;
     use couchServe\service\Lib\Abstracts\ModuleValue;
+    use couchServe\service\Lib\Command;
 
     class TogglePercent extends ModuleValue {
 
@@ -24,6 +25,14 @@
 
         public function getControlType() {
             return ModuleValue::CONTROL_TYPE_TOGGLE;
+        }
+
+        /**
+         * @param Command $command
+         */
+        public function setValueFromCommand(Command $command) {
+            $data = $command->getData();
+            $this->setValue((isset($data[0]) ? $data[0] : 0));
         }
 
         public function getExportableOptions() {
