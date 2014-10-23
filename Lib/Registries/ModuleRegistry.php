@@ -2,6 +2,7 @@
 
     namespace couchServe\Service\Lib\Registries;
     use couchServe\Service\Lib\Abstracts\Module;
+    use couchServe\Service\Lib\Exceptions\GenericException;
     use couchServe\Service\Lib\Exceptions\ModuleRegistryException;
     use couchServe\Service\Lib\Log;
 
@@ -56,6 +57,19 @@
                 }
             }
             return $modules;
+        }
+
+        /**
+         * @param $id
+         * @return Module
+         * @throws ModuleRegistryException
+         */
+        public function findLocalModuleById($id) {
+            $id = APP_ID . '_' . $id;
+            if (!isset($this->modules[$id])) {
+                throw new ModuleRegistryException(vsprintf('Could not find module by id %d', [$id]));
+            }
+            return $this->modules[$id];
         }
 
         /**
