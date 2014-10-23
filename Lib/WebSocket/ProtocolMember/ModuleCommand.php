@@ -20,11 +20,11 @@
          * @param Connection $connection
          */
         public function act(Array $data, Connection $connection) {
-            if (!isset($data['type']) || !isset($data['name'])) {
+            if ((!isset($data['type']) || !isset($data['name'])) && !isset($data['id'])) {
                 return;
             }
 
-            $command = $this->createCommandByTypeAndName($data['type'], $data['name']);
+            $command = (!isset($data['id'])) ? $this->createCommandByTypeAndName($data['type'], $data['name']) : $this->createCommandById($data['id']);
             if (isset($data['data']) && is_array($data['data'])) {
                 $command->setData($data['data']);
             }
@@ -36,6 +36,23 @@
             return new Command;
         }
 
+        /**
+         * @param $id
+         * @return Command
+         * @throws \couchServe\Service\Lib\Exceptions\ModuleRegistryException
+         */
+        protected function createCommandById($id) {
+            $command = $this->createCommand();
+            $command->setTargetByModule($this->getModuleRegistry()->findLocalModuleById($id));
+            return $command;
+        }
+
+        /**
+         * @param $type
+         * @param $name
+         * @return Command
+         * @throws \couchServe\Service\Lib\Exceptions\ModuleRegistryException
+         */
         protected function createCommandByTypeAndName($type, $name) {
             $command = $this->createCommand();
             $command->setTargetByModule($this->getModuleRegistry()->findModuleByTypeAndName($type, $name));
