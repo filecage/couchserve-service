@@ -102,6 +102,15 @@
                     ]
                 ]);
             }
+
+            foreach ($commandPool->getCommands() as $command) {
+                $this->webSocketContainer->getHandler()->broadcast([
+                    'type' => 'UPDATE',
+                    'component' => 'MODULE',
+                    'target' => $command->getModule()->getId(),
+                    'options' => $command->getModule()->getModuleValue()->getExportableOptions()
+                ]);
+            }
         }
 
         protected function stayAlive() {
