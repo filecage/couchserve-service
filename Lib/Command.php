@@ -32,6 +32,11 @@
         protected $origin;
 
         /**
+         * @var Module
+         */
+        protected $module;
+
+        /**
          * @return Array
          */
         public function getData() {
@@ -48,6 +53,7 @@
         }
 
         public function setTargetByModule(Module $module) {
+            $this->module = $module;
             $this->setName($module->getName())
                  ->setTargetId($module->getId())
                  ->setType($module->getType());
@@ -110,6 +116,13 @@
         public function setType($type) {
             $this->type = $type;
             return $this;
+        }
+
+        /**
+         * @return Module
+         */
+        public function getModule() {
+            return $this->module;
         }
 
         /**
